@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheduling Application Instructions</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #FF7900;
+        }
+
+        h2 {
+            color: #E67E22;
+        }
+
+        .step {
+            margin-bottom: 20px;
+        }
+
+        .note {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-left: 5px solid #FF7900;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Scheduling Application Instructions</h1>
+
+    <div class="note">
+        <strong>Note:</strong> This application helps you schedule tasks based on available resources and dynamic
+        dependencies.
+    </div>
+
+    <h2>How to Use the Application</h2>
+
+    <div class="step">
+        <h3>Step 1: Prepare Your Excel File</h3>
+        <p>Create an Excel file with two sheets:</p>
+
+        <h4>Sheet 1: Tasks</h4>
+        <p>Format Sheet 1 as follows:</p>
+        <table>
+            <tr>
+                <th>Task Name</th>
+                <th>Priority</th>
+                <th>BE API</th>
+                <th>Android</th>
+                <th>IOS</th>
+                <th>QC Creation</th>
+                <th>QC Execution</th>
+            </tr>
+            <tr>
+                <td>VCN - Listing</td>
+                <td>2</td>
+                <td>1</td>
+                <td>6</td>
+                <td>6</td>
+                <td>0.5</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>VCN - Creation</td>
+                <td>1</td>
+                <td>1</td>
+                <td>5</td>
+                <td>5</td>
+                <td>1</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+        </table>
+        <p>List all tasks with their respective priorities and time estimates (in days) for each stage.</p>
+
+        <h4>Sheet 2: Resources</h4>
+        <p>Format Sheet 2 as follows:</p>
+        <table>
+            <tr>
+                <th>BE API</th>
+                <th>IOS</th>
+                <th>Android</th>
+                <th>QC</th>
+            </tr>
+            <tr>
+                <td>George</td>
+                <td>David</td>
+                <td>Mohamed</td>
+                <td>Abdullah</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Bahey</td>
+                <td>Sara</td>
+                <td>Neyazy</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Ezz</td>
+            </tr>
+        </table>
+        <p>List all available resources under their respective categories.</p>
+    </div>
+
+    <div class="note">
+        <strong>Default Dependencies:</strong>
+        <ul>
+            <li>Tasks with "Creation" must be completed before tasks with "Execution" can start.</li>
+            <li>Tasks in the "BE API" category must be completed before tasks in "IOS" and "Android" categories can
+                start.</li>
+            <li>Tasks in the "IOS" and "Android" categories must be completed before tasks in the "QC execution"
+                category can start.</li>
+            <li>Tasks labeled "QC Creation" must be completed before tasks labeled "QC execution" can start.</li>
+            <li>The same resource should handle both "QC Creation" and "QC execution" tasks.</li>
+        </ul>
+    </div>
+
+    <div class="step">
+        <h3>Step 2: Configure Dependency Rules</h3>
+        <p>The application includes a Dependency Rules window that allows you to dynamically configure the dependencies
+            between departments.</p>
+        <ul>
+            <li><strong>Accessing the Dependency Rules Window:</strong> Open the application and select the "Dependency
+                Rules" option from the main menu.</li>
+            <li><strong>Configuring Dependencies:</strong> In the Dependency Rules window, you'll see a list of
+                departments along with checkboxes for other departments. For each department, select the checkboxes
+                corresponding to the departments that must be completed before it can start.</li>
+            <li><strong>Saving Changes:</strong> After configuring the dependencies, click the "Save Dependencies"
+                button to store the rules. These will be saved in a JSON file (e.g., <code>dependency_rules.json</code>)
+                and applied when generating the schedule.</li>
+            <li><strong>Updating Dependencies:</strong> You can update the dependencies at any time by reopening the
+                Dependency Rules window and making adjustments.</li>
+        </ul>
+    </div>
+    <div class="note">
+        <strong>Example JSON file format:</strong>
+        <pre><code>       { 
+            "Creation": ["Execution"],
+            "BE API": ["IOS", "Android"],
+            "IOS": ["QC execution"],
+            "Android": ["QC execution"],
+            "QC Creation": ["QC execution"]
+        }</code></pre>
+        <ul>
+            <li><strong>Save Changes:</strong> Save the updated rules file and ensure it is in the correct location
+                where the application can access it. (same path as the application)</li>
+        </ul>
+    </div>
+    </div>
+
+    <div class="step">
+        <h3>Step 3: Launch the Application</h3>
+        <p>Open the Scheduling Application on your computer.</p>
+    </div>
+
+    <div class="step">
+        <h3>Step 4: Select Input File</h3>
+        <p>Click the "Browse" button next to "Input Excel File" and select your prepared Excel file.</p>
+    </div>
+
+    <div class="step">
+        <h3>Step 5: Choose Output File Location</h3>
+        <p>Click the "Browse" button next to "Output Schedule File" to choose where you want to save the results.</p>
+    </div>
+
+    <div class="step">
+        <h3>Step 6: Run the Scheduler</h3>
+        <p>Click the "Run Scheduler" button to process your data and generate the schedule based on the defined
+            dependencies.</p>
+    </div>
+
+    <div class="step">
+        <h3>Step 7: Review Results</h3>
+        <p>Once the process is complete, you'll see a success message, and the application will automatically open the
+            output file.</p>
+    </div>
+
+    <div class="note">
+        <strong>Tip:</strong> Ensure your input file is correctly formatted to avoid errors. The scheduler will apply
+        the dynamic dependencies and resource allocation rules as specified.
+    </div>
+
+    <!-- <h2>Need More Help?</h2>
+    <p>If you need further assistance, please contact our support team at support@example.com.</p> -->
+</body>
+
+</html>

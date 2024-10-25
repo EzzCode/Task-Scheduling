@@ -1,0 +1,7 @@
+{
+    "Creation": ["Execution"],
+    "BE API": ["IOS", "Android"],
+    "IOS": ["QC execution"],
+    "Android": ["QC execution"],
+    "QC Creation": ["QC execution"]
+}
